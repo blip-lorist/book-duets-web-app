@@ -1,5 +1,7 @@
 <h1>Suggested Pairing</h1>
-<%= @suggested_pairing["book_duet"] %>
-<%= @suggested_pairing["news_source"] %>
-<%= @suggested_pairing["musician"] %>
-<%= @suggested_pairing["author"] %>
+
+<p><%= @suggested_pairing["book_duet"] %></p>
+
+<p>A Book Duet by <%= @suggested_pairing["musician"] %> and <%= @suggested_pairing["author"] %>
+Learn more about their connection at <%= @suggested_pairing["news_source"] %>.
+</p>
