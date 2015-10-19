@@ -12,7 +12,10 @@ class BookDuetsController < ApplicationController
   end
 
   def suggested_pairing
+    @response = HTTParty.get(BASE_URI + "/suggested_pairing", :headers => {
+      "Book-Duets-Key" => ENV['BOOK_DUETS_API_KEY'] })
 
+    binding.pry
 
     # Magic happens here to call API and return a suggested pairing
   end
