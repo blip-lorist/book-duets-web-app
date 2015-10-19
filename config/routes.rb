@@ -5,6 +5,7 @@ Rails.application.routes.draw do
   # You can have the root of your site routed with "root"
   root 'book_duets#index'
 
+  get '/suggested_pairing' => 'book_duets#suggested_pairing', as: 'suggested_pairing'
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
 
