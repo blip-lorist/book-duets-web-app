@@ -14,6 +14,13 @@ RSpec.describe BookDuetsController, type: :controller do
       get :suggested_pairing
       expect(response).to render_template("suggested_pairing")
     end
+
+    it "receives a JSON object" do
+
+    end
+
+    it "has a JSON response with musician, author, book_duet, and news_source keys" do
+    end
   end
 
 end
