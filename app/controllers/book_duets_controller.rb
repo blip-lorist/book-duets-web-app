@@ -2,7 +2,7 @@ class BookDuetsController < ApplicationController
 
   require "HTTParty"
 
-  if rails.env.production?
+  if Rails.env.production?
     BASE_URI = "blah.blah"
   else
     BASE_URI = "http://localhost:3333"
@@ -12,6 +12,8 @@ class BookDuetsController < ApplicationController
   end
 
   def suggested_pairing
+
+
     # Magic happens here to call API and return a suggested pairing
   end
 
