@@ -22,11 +22,9 @@ RSpec.describe BookDuetsController, type: :controller do
         get :suggested_pairing
         keys = ["musician", "author", "book_duet", "news_source"]
         keys.each do |key|
-          suggested_pairing = JSON.parse(response)
-          expect(suggested_pairing.keys).to include(key)
+          expect(assigns(:suggested_pairing).keys).to include(key)
         end
       end
     end
   end
-
 end
