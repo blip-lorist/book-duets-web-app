@@ -1,5 +1,13 @@
 class BookDuetsController < ApplicationController
 
+  require "HTTParty"
+
+  if rails.env.production?
+    BASE_URI = "blah.blah"
+  else
+    BASE_URI = "http://localhost:3333"
+  end
+
   def index
   end
 

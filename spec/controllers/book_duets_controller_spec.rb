@@ -9,4 +9,11 @@ RSpec.describe BookDuetsController, type: :controller do
     end
   end
 
+  describe "GET #suggested_pairing" do
+    it "renders the suggested_pairing template" do
+      get :suggested_pairing
+      expect(response).to render_template("suggested_pairing")
+    end
+  end
+
 end
