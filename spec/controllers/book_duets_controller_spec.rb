@@ -17,23 +17,15 @@ RSpec.describe BookDuetsController, type: :controller do
       end
     end
 
-    it "authenticates the client and response with success" do
+    it "retrieves suggested_pairing with musician, author, book_duet, and news_source keys" do
       VCR.use_cassette 'controllers/suggested_pairing', :record => :once do
         get :suggested_pairing
-        binding.pry
-        expect(response.response_code).to_not be(401)
-        expect(response.response_code).to be(200)
+        keys = ["musician", "author", "book_duet", "news_source"]
+        keys.each do |key|
+          suggested_pairing = JSON.parse(response)
+          expect(suggested_pairing.keys).to include(key)
+        end
       end
-    end
-
-    it "retrieves a JSON object" do
-      VCR.use_cassette 'controllers/suggested_pairing', :record => :once do
-        get :suggested_pairing
-        expect(response.header['Content-Type']).to include 'application/json'
-      end
-    end
-
-    it "has a JSON response with musician, author, book_duet, and news_source keys" do
     end
   end
 
