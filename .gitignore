@@ -19,3 +19,7 @@
 .DS_Store
 
 coverage
+
+.env
+
+/spec/vcr_cassettes
