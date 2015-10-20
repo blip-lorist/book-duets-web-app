@@ -1,9 +1,11 @@
-<h1>Suggested Pairing</h1>
+<h3>A Suggested Pairing</h3>
 
-<%= link_to "Gimme another one", suggested_pairing_path %>
+<h4>Ft. <u><%= @suggested_pairing["musician"] %></u>'s lyrics and <u><%= @suggested_pairing["author"] %></u>'s Wikiquote page</h4>
 
-<p><%= @suggested_pairing["book_duet"] %></p>
-
-<p>A BookDuet by <%= @suggested_pairing["musician"] %> and <%= @suggested_pairing["author"] %></p>
+<blockquote>
+  <p><%= @suggested_pairing["book_duet"] %></p>
+</blockquote>
 
 <p>Read more about the <%= link_to "connection", @suggested_pairing["news_source"] %> between this musician and author.</p>
+
+<%= link_to "Gimme another one!", suggested_pairing_path, class: "btn btn-info" %>

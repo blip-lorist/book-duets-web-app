@@ -1,7 +1,8 @@
-<h1>Custom Duet</h1>
+<h3>A Custom Duet</h3>
+<h4>Ft. <u><%= @custom_duet["musician"] %></u>'s lyrics and <u><%= @custom_duet["author"] %></u>'s Wikiquote page</h4>
 
-<p><%= @custom_duet["book_duet"]%></p>
+<blockquote>
+  <p><%= @custom_duet["book_duet"]%></p>
+</blockquote>
 
-<p>Ft. <%= @custom_duet["musician"] %> and <%= @custom_duet["author"] %></p>
-
-<p><%= link_to "Encore!", custom_duet_path%></p>
+<p><%= link_to "Encore!", custom_duet_path, class: "btn btn-info"%></p>
