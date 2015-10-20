@@ -39,4 +39,23 @@ RSpec.describe BookDuetsController, type: :controller do
       expect(response).to redirect_to(custom_duet_path("Weird Al", "William S. Burroughs"))
     end
   end
+
+  describe "GET #custom_duet" do
+    it "renders the custom_duet template" do
+      VCR.use_cassette 'controllers/custom_duet', :record => :once do
+        get :custom_duet, :musician => "Kesha", :author => "Karl Marx"
+        expect(response).to render_template("custom_duet")
+      end
+    end
+
+    it "receives custom_duet with musician, author, book_duet, and news_source keys" do
+      VCR.use_cassette 'controllers/custom_duet', :record => :once do
+        get :custom_duet, :musician => "Kesha", :author => "Karl Marx"
+        keys = ["musician", "author", "book_duet"]
+        keys.each do |key|
+          expect(assigns(:custom_duet).keys).to include(key)
+        end
+      end
+    end
+  end
 end
