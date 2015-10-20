@@ -5,10 +5,10 @@
 
 <%= form_tag custom_duet_redirect_path, class: "form-inline" do %>
 <div class="form-group">
-    <%= text_field_tag :musician, params[:musician], class: "form-control", placeholder: "Musician name" %>
+    <%= text_field_tag :musician, nil, class: "form-control", placeholder: "Musician name" %>
 </div>
 <div class="form-group">
-    <%= text_field_tag :author, params[:musician], class: "form-control", placeholder: "Author name" %>
+    <%= text_field_tag :author, nil, class: "form-control", placeholder: "Author name" %>
 </div>
   <%= submit_tag 'SANG IT', :class => "btn btn-success"%>
 <% end %>
