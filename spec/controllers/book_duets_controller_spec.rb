@@ -27,4 +27,16 @@ RSpec.describe BookDuetsController, type: :controller do
       end
     end
   end
+
+  describe "custom_duet_redirect" do
+    it "redirects if both a musician and author aren't provided in custom duet form" do
+      get :custom_duet_redirect, :musician => "Weird Al"
+      expect(response).to redirect_to(root_path)
+    end
+
+    it "redirects to custom_duet if both musician and author are provided" do
+      get :custom_duet_redirect, :musician => "Weird Al", :author => "William S. Burroughs"
+      expect(response).to redirect_to(custom_duet_path("Weird Al", "William S. Burroughs"))
+    end
+  end
 end
