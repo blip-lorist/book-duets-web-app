@@ -6,6 +6,11 @@ Rails.application.routes.draw do
   root 'book_duets#index'
 
   get '/suggested_pairing' => 'book_duets#suggested_pairing', as: 'suggested_pairing'
+
+  post '/custom_duet_redirect' => 'book_duets#custom_duet_redirect', as: 'custom_duet_redirect'
+
+  get '/custom_duet/:musician/:artist' => 'book_duets#custom_duet', as: 'custom_duet'
+
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
 

@@ -8,7 +8,14 @@ class BookDuetsController < ApplicationController
     BASE_URI = "http://localhost:3333"
   end
 
-  def index
+  def index; end
+
+  def custom_duet_redirect
+    if params[:musician].present? && params[:author].present?
+      redirect_to custom_duet_path(params[:musician], params[:author])
+    else
+      redirect_to root_path
+    end
   end
 
   def suggested_pairing
@@ -17,8 +24,11 @@ class BookDuetsController < ApplicationController
     # Magic happens here to call API and return a suggested pairing
   end
 
-  def custom_duet (musician, artist)
-    @custom_duet = HTTParty.get(BASE_URI + "/custom_duet?musician=#{musician}&artist=#{artist}", :headers => {
+  def custom_duet
+    musician = params[:musician]
+    author = params[:author]
+
+    @custom_duet = HTTParty.get(BASE_URI + "/custom_duet?musician=#{musician}&author=#{author}", :headers => {
       "Book-Duets-Key" => ENV['BOOK_DUETS_API_KEY'] })
     # Magic happens here to call API and return a custom duet
   end
