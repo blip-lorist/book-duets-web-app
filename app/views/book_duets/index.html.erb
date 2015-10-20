@@ -1,0 +1,11 @@
+<p><%= link_to "Suggested Pairing", suggested_pairing_path %></p>
+<!-- Button here that loads a page with a suggested pairing -->
+
+<!-- Fields for creating a custom duet -->
+<%= form_tag custom_duet_redirect_path do %>
+  <%= label_tag :musician %>
+  <%= text_field_tag :musician %>
+  <%= label_tag :author %>
+  <%= text_field_tag :author %>
+  <%= submit_tag 'Custom Book Duet - SANG IT' %>
+<% end %>
