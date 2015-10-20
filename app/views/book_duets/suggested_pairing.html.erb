@@ -2,6 +2,6 @@
 
 <p><%= @suggested_pairing["book_duet"] %></p>
 
-<p>A Book Duet by <%= @suggested_pairing["musician"] %> and <%= @suggested_pairing["author"] %>
-Learn more about their connection at <%= @suggested_pairing["news_source"] %>.
-</p>
+<p>A Book Duet by <%= @suggested_pairing["musician"] %> and <%= @suggested_pairing["author"] %></p>
+
+<p>Read more about the <%= link_to "connection", @suggested_pairing["news_source"] %> between this musician and author.</p>
