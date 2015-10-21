@@ -7,7 +7,9 @@ class User < ActiveRecord::Base
       username: auth_hash[:info][:name],
       profile_image: auth_hash[:info][:image]
     )
-    
+    if auth_hash["info"]["email"]
+      user.update(email: auth_hash["info"]["email"])
+    end
     return user.save ? user : nil
   end
 end
