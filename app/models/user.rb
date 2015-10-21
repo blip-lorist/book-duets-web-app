@@ -1,6 +1,6 @@
 class User < ActiveRecord::Base
   has_many :mixtapes
-  has_many :users, through: :showtimes
+  has_many :book_duets, through: :mixtapes
 
   validates :uid, :provider, :username, presence: true
 
