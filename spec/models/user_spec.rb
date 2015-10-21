@@ -31,14 +31,15 @@ RSpec.describe User, type: :model do
 
   describe "initialize from omniauth" do
     let(:user) { User.find_or_create_from_auth_hash(OmniAuth.config.mock_auth[:twitter]) }
-
     it "creates a valid user" do
       expect(user).to be_valid
     end
 
     context "when it's invalid" do
       it "returns nil" do
-        user = User.find_or_create_from_auth_hash({:info => {:username => "unigoat"}})
+        invalid_auth_hash = OmniAuth.config.mock_auth[:twitter]
+        invalid_auth_hash.provider = ""
+        user = User.find_or_create_from_auth_hash(invalid_auth_hash)
         expect(user).to be_nil
       end
     end
