@@ -25,4 +25,14 @@ RSpec.describe SessionsController, type: :controller do
       expect(response).to redirect_to(root_path)
     end
   end
+
+  describe "#destroy" do
+
+    it "destroys the session" do
+      post :create, provider: :twitter
+      expect(session[:user_id]).to_not be_nil
+      get :destroy
+      expect(session[:user_id]).to be_nil
+    end
+  end
 end
