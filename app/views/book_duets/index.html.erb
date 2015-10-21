@@ -1,3 +1,6 @@
+<p> <%= link_to "Sign up with Twitter", "/auth/twitter" %> or <%= link_to "Sign up with email", "/auth/identity/register" %></p>
+<p> <%= link_to "Sign in with Twitter", "/auth/twitter" %> or <%= link_to "Sign in with email", "/auth/identity" %></p>
+
 <% if current_user %>
 <p>Signed in as <%= current_user.username %></p>
 <% end %>
