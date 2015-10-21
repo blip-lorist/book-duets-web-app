@@ -1,3 +1,6 @@
+<% if current_user %>
+<p>Signed in as <%= current_user.username %></p>
+<% end %>
 <p><%= link_to "Suggested Pairing", suggested_pairing_path, class: "btn btn-success" %></p>
 <!-- Button here that loads a page with a suggested pairing -->
 
