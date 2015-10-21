@@ -5,7 +5,10 @@ Rails.application.routes.draw do
   # You can have the root of your site routed with "root"
   root 'book_duets#index'
 
-  get '/auth/:provider/callback', to: 'sessions#create'
+  match '/auth/:provider/callback', to: 'sessions#create', via: [:get, :post]
+
+  match '/logout', to: 'sessions#destroy', via: [:get, :post]
+  # get '/auth/:provider/callback', to: 'sessions#create'
 
   get '/suggested_pairing' => 'book_duets#suggested_pairing', as: 'suggested_pairing'
 
