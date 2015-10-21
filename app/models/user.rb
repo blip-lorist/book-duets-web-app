@@ -1,4 +1,7 @@
 class User < ActiveRecord::Base
+  has_many :mixtapes
+  has_many :users, through: :showtimes
+
   validates :uid, :provider, :username, presence: true
 
   def self.find_or_create_from_auth_hash(auth_hash)
