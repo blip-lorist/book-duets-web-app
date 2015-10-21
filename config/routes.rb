@@ -5,6 +5,8 @@ Rails.application.routes.draw do
   # You can have the root of your site routed with "root"
   root 'book_duets#index'
 
+  get '/auth/:provider/callback', to: 'sessions#create'
+
   get '/suggested_pairing' => 'book_duets#suggested_pairing', as: 'suggested_pairing'
 
   post '/custom_duet_redirect' => 'book_duets#custom_duet_redirect', as: 'custom_duet_redirect'
