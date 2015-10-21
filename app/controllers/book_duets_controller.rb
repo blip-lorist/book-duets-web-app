@@ -32,4 +32,16 @@ class BookDuetsController < ApplicationController
     @custom_duet = HTTParty.get(BASE_URI + "/custom_duet?musician=#{musician}&author=#{author}", :headers => {
       "Book-Duets-Key" => ENV['BOOK_DUETS_API_KEY'] })
   end
+
+  def create
+    @book_duet = BookDuet.create(
+    musician: params[:musician],
+    author: params[:author],
+    duet_text: params[:book_duet],
+    user_id: session[:user_id])
+
+    redirect_to root_path
+  end
+
+
 end
