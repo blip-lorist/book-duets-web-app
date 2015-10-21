@@ -38,7 +38,7 @@ RSpec.describe User, type: :model do
 
     context "when it's invalid" do
       it "returns nil" do
-        user = User.find_or_create_from_omniauth({:info => {:username => "unigoat"}})
+        user = User.find_or_create_from_auth_hash({:info => {:username => "unigoat"}})
         expect(user).to be_nil
       end
     end

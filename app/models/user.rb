@@ -7,6 +7,7 @@ class User < ActiveRecord::Base
       username: auth_hash[:info][:name],
       profile_image: auth_hash[:info][:image]
     )
-    user
+    
+    return user.save ? user : nil
   end
 end
