@@ -7,7 +7,7 @@ Rails.application.routes.draw do
 
   match '/auth/:provider/callback', to: 'sessions#create', via: [:get, :post]
 
-  match '/logout', to: 'sessions#destroy', via: [:get, :post]
+  match '/logout', to: 'sessions#destroy', via: [:get, :post], as: "logout"
   # get '/auth/:provider/callback', to: 'sessions#create'
 
   get '/suggested_pairing' => 'book_duets#suggested_pairing', as: 'suggested_pairing'
