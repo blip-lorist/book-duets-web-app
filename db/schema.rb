@@ -11,10 +11,18 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151021185239) do
+ActiveRecord::Schema.define(version: 20151021185718) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "book_duets", force: :cascade do |t|
+    t.string   "musician"
+    t.string   "author"
+    t.string   "duet_text"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "identities", force: :cascade do |t|
     t.string   "name"
