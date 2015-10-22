@@ -1,7 +1,10 @@
 class User < ActiveRecord::Base
+  # ____ Associations ____
+  has_many :book_duets
   has_many :mixtapes
-  has_many :book_duets, through: :mixtapes
 
+
+  # ____ Validations ____
   validates :uid, :provider, :username, presence: true
 
   def self.find_or_create_from_auth_hash(auth_hash)
