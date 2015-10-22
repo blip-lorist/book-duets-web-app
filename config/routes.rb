@@ -7,6 +7,8 @@ Rails.application.routes.draw do
   # ____ Omniauth and sessions ____
   match '/auth/:provider/callback', to: 'sessions#create', via: [:get, :post]
 
+  match '/auth/failure', :to => 'sessions#failure', :via => [:get, :post]
+
   match '/logout', to: 'sessions#destroy', via: [:get, :post], as: "logout"
 
   # ____ BookDuets ____
