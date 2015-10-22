@@ -26,6 +26,7 @@ Rails.application.routes.draw do
   # ____ Mixtapes ____
   resources :mixtapes
 
+  resources :account_activations, only: [:edit]
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
 
