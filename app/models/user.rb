@@ -1,7 +1,6 @@
 class User < ActiveRecord::Base
   attr_accessor :remember_token, :activation_token
   before_create :create_activation_digest
-  before_save :downcase_email
   validates :uid, :provider, :username, presence: true
 
   private
@@ -12,7 +11,8 @@ class User < ActiveRecord::Base
       username: auth_hash[:info][:name]
     )
     if auth_hash["info"]["email"].present?
-      user.update(email: auth_hash["info"]["email"])
+      email = auth_hash["info"]["email"].downcase
+      user.update(email: email)
     end
     return user.save ? user : nil
   end
@@ -33,13 +33,8 @@ class User < ActiveRecord::Base
     SecureRandom.urlsafe_base64
   end
 
-  def downcase_email
-    self.email = email.downcase
-  end
-
   def remember
     self.remember_token = User.new_token
     update_attribute(:remember_digest, User.digest(remember_token))
   end
-
 end
