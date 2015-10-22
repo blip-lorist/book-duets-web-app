@@ -9,10 +9,10 @@ RSpec.describe MixtapesController, type: :controller do
     end
 
     it "loads all mixtapes into @mixtapes" do
-      book_duet1 = create :book_duet
-      book_duet2 = create :book_duet
+      mixtape1 = create :mixtape
+      mixtape2 = create :mixtape
       get :index
-      expect(assigns(:mixtapes)).to match_array([book_duet1, book_duet2])
+      expect(assigns(:mixtapes)).to match_array([mixtape1, mixtape2])
     end
   end
 
@@ -28,6 +28,7 @@ RSpec.describe MixtapesController, type: :controller do
     end
 
     it "loads the correct mixtape" do
+      create :mixtape # not sure why the primary key doesn't reset to 1 in pg test
       get :show, id: 1
       expect(assigns(:mixtape)).to eq(@mixtape)
     end
@@ -42,8 +43,14 @@ RSpec.describe MixtapesController, type: :controller do
 
   describe "POST #create" do
     context "with valid params" do
+      let(:valid_params) do
+        {name: "Ironical mashups", description: "Ironful irony."}
+      end
 
-
+      it "creates a new mixtape" do
+        post :create, mixtape: valid_params
+        expect(Mixtape.count).to eq(1)
+      end
     end
   end
 end
