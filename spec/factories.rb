@@ -1,9 +1,12 @@
 FactoryGirl.define do
   factory :user do
-    provider "twitter"
+    provider "identity"
     uid "123"
+    email "to@example.org"
     username "Dana Scully"
     profile_image "unigoat.jpg"
+    activated true
+    activated_at Time.zone.now
   end
 
   factory :mixtape do
