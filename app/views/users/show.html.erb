@@ -1,4 +1,15 @@
-<h1>Your Saved BookDuets</h1>
+<h3>Saved BookDuets</h3>
+
 <% @user.book_duets.each do |book_duet| %>
-  <%= book_duet %>
+  <blockquote><%= book_duet.duet_text %></blockquote>
+   <p> - a <%= book_duet.musician %> and <%= book_duet.author %> pairing</p>
 <% end %>
+<%= link_to "See all saved BookDuets", "" %>
+
+<h3>Mixtapes</h3>
+
+<% @user.mixtapes.each do |mixtape| %>
+  <p>Title: <%= mixtape.title %></p>
+  <p>Description: <%= mixtape.description %></p>
+<% end %>
+<%= link_to "See all mixtapes", "" %>
