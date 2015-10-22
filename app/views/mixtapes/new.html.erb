@@ -1,0 +1,21 @@
+<h1>Inflict your horrible taste on others with a new mixtape</h1>
+
+<%= form_for @mixtape do |f| %>
+  <div class="form-group">
+      <fieldset>
+        <legend>Mixtape details</legend>
+
+        <div class="form-group">
+          <%= f.label :title, "Title" %>
+          <%= f.text_field :title, required: true, class: "form-control" %>
+        </div>
+
+        <div class="form-group">
+          <%= f.label :description, "Description"  %>
+          <%= f.text_field :description, class: "form-control" %>
+        </div>
+
+        <%= f.submit "Submit", class: "btn btn-primary" %>
+    </fieldset>
+  </div>
+<% end %>
