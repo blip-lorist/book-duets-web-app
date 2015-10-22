@@ -1,10 +1,17 @@
 <h3>A Custom Duet</h3>
-<h4>Ft. <u><%= @custom_duet["musician"] %></u>'s lyrics and <u><%= @custom_duet["author"] %></u>'s Wikiquote page</h4>
 
-<blockquote>
-  <p><%= @custom_duet["book_duet"]%></p>
-</blockquote>
+<% if @custom_duet["error"] %>
+  <p><%= @custom_duet["error"] %></p>
+  <p><%= @custom_duet["suggestions"] %></p>
+  <p><%= link_to "Try Again", root_path, class: "btn btn-info"%></p>
 
-<p><%= link_to "Encore!", custom_duet_path, class: "btn btn-info"%></p>
-<p><%= link_to "Save this Book Duet", create_book_duet_path(@custom_duet), :method => :post %></p>
-<!-- author: @custom_duet[author], duet_text: @custom_duet[book_duet]), method: "post", class: "btn btn-info" -->
+<% else %>
+  <h4>Ft. <u><%= @custom_duet["musician"] %></u>'s lyrics and <u><%= @custom_duet["author"] %></u>'s Wikiquote page</h4>
+
+  <blockquote>
+    <p><%= @custom_duet["book_duet"]%></p>
+  </blockquote>
+
+  <p><%= link_to "Encore!", custom_duet_path, class: "btn btn-info"%></p>
+  <p><%= link_to "Save this Book Duet", create_book_duet_path(@custom_duet), :method => :post %></p>
+<% end %>

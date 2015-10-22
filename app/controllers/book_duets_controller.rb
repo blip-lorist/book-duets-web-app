@@ -29,6 +29,7 @@ class BookDuetsController < ApplicationController
     author = params[:author]
 
     # Call API and return a custom duet
+
     @custom_duet = HTTParty.get(BASE_URI + "/custom_duet?musician=#{musician}&author=#{author}", :headers => {
       "Book-Duets-Key" => ENV['BOOK_DUETS_API_KEY'] })
   end
