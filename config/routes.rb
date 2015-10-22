@@ -4,7 +4,6 @@ Rails.application.routes.draw do
 
   # You can have the root of your site routed with "root"
   root 'book_duets#index'
-
   # Omniauth and sessions
   match '/auth/:provider/callback', to: 'sessions#create', via: [:get, :post]
 
@@ -17,6 +16,8 @@ Rails.application.routes.draw do
   get '/custom_duet/:musician/:author' => 'book_duets#custom_duet', as: 'custom_duet'
 
   post '/book_duet/' => 'book_duets#create', as: 'create_book_duet'
+
+  get '/profile' => 'users#show', as: 'profile'
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
