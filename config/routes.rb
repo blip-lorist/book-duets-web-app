@@ -16,6 +16,7 @@ Rails.application.routes.draw do
 
   get '/custom_duet/:musician/:author' => 'book_duets#custom_duet', as: 'custom_duet'
 
+  resources :account_activations, only: [:edit]
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
 

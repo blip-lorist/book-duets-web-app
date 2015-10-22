@@ -11,10 +11,24 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151021043519) do
+ActiveRecord::Schema.define(version: 20151022184153) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "book_duets", force: :cascade do |t|
+    t.string   "musician"
+    t.string   "author"
+    t.string   "duet_text"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer  "user_id"
+  end
+
+  create_table "book_duets_mixtapes", id: false, force: :cascade do |t|
+    t.integer "mixtape_id",   null: false
+    t.integer "book_duet_id", null: false
+  end
 
   create_table "identities", force: :cascade do |t|
     t.string   "name"
@@ -24,14 +38,25 @@ ActiveRecord::Schema.define(version: 20151021043519) do
     t.datetime "updated_at",      null: false
   end
 
+  create_table "mixtapes", force: :cascade do |t|
+    t.string   "title"
+    t.integer  "user_id"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+    t.string   "description"
+  end
+
   create_table "users", force: :cascade do |t|
     t.string   "provider"
     t.string   "uid"
     t.string   "username"
     t.string   "profile_image"
-    t.datetime "created_at",    null: false
-    t.datetime "updated_at",    null: false
+    t.datetime "created_at",                        null: false
+    t.datetime "updated_at",                        null: false
     t.string   "email"
+    t.string   "activation_digest"
+    t.boolean  "activated",         default: false
+    t.datetime "activated_at"
   end
 
 end
