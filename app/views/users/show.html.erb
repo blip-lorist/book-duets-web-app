@@ -1,6 +1,6 @@
 <h3>Saved BookDuets</h3>
 
-<% @user.book_duets.each do |book_duet| %>
+<% @book_duets.each do |book_duet| %>
   <blockquote><%= book_duet.duet_text %></blockquote>
    <p> - a <%= book_duet.musician %> and <%= book_duet.author %> pairing</p>
 <% end %>
@@ -9,7 +9,7 @@
 <h3>Mixtapes</h3>
 <p><%= link_to "New Mixtape", new_mixtape_path %></p>
 
-<% @user.mixtapes.each do |mixtape| %>
+<% @mixtapes each do |mixtape| %>
   <p>Title: <%= mixtape.title %></p>
   <p>Description: <%= mixtape.description %></p>
 <% end %>

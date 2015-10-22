@@ -26,12 +26,6 @@ RSpec.describe MixtapesController, type: :controller do
       get :show, id: @mixtape
       expect(response).to render_template("show")
     end
-
-    it "loads the correct mixtape" do
-      create :mixtape # not sure why the primary key doesn't reset to 1 in pg test
-      get :show, id: 1
-      expect(assigns(:mixtape)).to eq(@mixtape)
-    end
   end
 
   describe "GET #new" do
@@ -51,6 +45,34 @@ RSpec.describe MixtapesController, type: :controller do
         post :create, mixtape: valid_params
         expect(Mixtape.count).to eq(1)
       end
+    end
+  end
+
+  describe "PUT #update" do
+    before(:each) do
+      @mixtape = create :mixtape
+    end
+
+    let(:new_mixtape_deets) do
+      {title: "New title", description: "New desc"}
+    end
+
+    it "updates the mixtape" do
+      put :update, id: @mixtape, mixtape: new_mixtape_deets
+      @mixtape.reload
+      expect(@mixtape.title).to eq("New title")
+    end
+  end
+
+  describe "DELETE #destroy" do
+    before(:each) do
+      @mixtape = create :mixtape
+    end
+
+    it "deletes the mixtape" do
+      expect(Mixtape.count).to eq(1)
+      delete :destroy, id: @mixtape
+      expect(Mixtape.count).to eq(0)
     end
   end
 end
