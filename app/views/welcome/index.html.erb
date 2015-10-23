@@ -1,15 +1,34 @@
-<div class="jumbotron text-center">
-    <h2>Try a <%= link_to "Suggested Pairing", suggested_pairing_path, class: "btn btn-primary" %> to explore</h2>
-    <h2>connections between authors and musicians.</h2>
-    <h2>~or~</h2>
-    <h2>Try out a custom BookDuet!</h2>
-    <%= form_tag custom_duet_redirect_path, class: "form-inline" do %>
-    <div class="form-group">
-        <%= text_field_tag :musician, nil, class: "form-control", placeholder: "Musician name" %>
+<!-- <div class="row"> -->
+  <div class="col-md-6 text-center">
+    <div class="panel panel-success">
+      <div class="panel-body">
+        <h2>Explore connections between authors and musicians with a <%= link_to "suggested pairing", suggested_pairing_path %></h2>
+      </div>
     </div>
-    <div class="form-group">
-        <%= text_field_tag :author, nil, class: "form-control", placeholder: "Author name" %>
+  </div>
+<!-- </div> -->
+
+<!-- <div class="row"> -->
+  <div class="col-md-1 text-center">
+    <h2>or</h2>
+  </div>
+<!-- </div> -->
+
+<!-- <div class="row"> -->
+  <div class="col-md-5 text-center">
+    <div class="panel panel-success">
+      <div class="panel-body">
+        <h2>Try out a custom BookDuet!</h2>
+        <%= form_tag custom_duet_redirect_path, class: "form-inline" do %>
+        <div class="form-group">
+            <%= text_field_tag :musician, nil, class: "form-control", placeholder: "Musician name" %>
+        </div>
+        <div class="form-group">
+            <%= text_field_tag :author, nil, class: "form-control", placeholder: "Author name" %>
+        </div>
+          <%= submit_tag 'SANG IT', :class => "btn btn-primary"%>
+        <% end %>
+      </div>
     </div>
-      <%= submit_tag 'SANG IT', :class => "btn btn-primary"%>
-    <% end %>
-</div>
+  </div>
+<!-- </div> -->

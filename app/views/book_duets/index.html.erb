@@ -2,7 +2,7 @@
   <div class="col-md-10">
     <ul class="list-group">
       <% @book_duets.each do |book_duet| %>
-        <li class="list-group-item"><strong><%= book_duet.user.username %></strong> saved a <%= @adj.sample %> <strong><%= link_to "#{book_duet.musician} / #{book_duet.author}", book_duet_path(book_duet) %></strong> Book Duet</li>
+        <li class="list-group-item"><strong><%= book_duet.user.username %></strong> saved a <%= @adj.sample %> <strong><%= link_to "#{book_duet.musician} & #{book_duet.author}", book_duet_path(book_duet) %></strong> Book Duet</li>
       <% end %>
     </ul>
   </div>
