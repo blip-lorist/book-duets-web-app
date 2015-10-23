@@ -1,4 +1,7 @@
 class BookDuetsController < ApplicationController
+  before_action :setup_book_duet, only: [:show, :add_to_mixtape, :edit]
+  before_action :set_book_duet, only: [:show, :setup_book_duet, :add_to_mixtape]
+
 
   MESSAGES = {
     create_success: "You've successfully saved a BookDuet.",
@@ -68,6 +71,35 @@ class BookDuetsController < ApplicationController
   end
 
   def show
+  end
+
+  def add_to_mixtape
+    mixtape_id = params[:mixtape][:mixtape_id]
+    mixtape = Mixtape.find(mixtape_id)
+    @book_duet.mixtapes << mixtape
+
+    if @book_duet.mixtapes.exists?(id: mixtape_id)
+      flash[:success] = "You successfully saved this Book Duet to your mixtape."
+      redirect_to root_path
+    else
+      flash[:failure] = "Sorry, that Book Duet couldn't be saved to your mixtape."
+      render :show
+    end
+  end
+
+
+  private
+
+  def set_book_duet
     @book_duet = BookDuet.find(params[:id])
+  end
+
+  def setup_book_duet
+    @book_duet = BookDuet.find(params[:id])
+    unless current_user == nil || current_user.mixtapes.empty?
+      id = current_user.id
+      @unused_mixtapes = current_user.mixtapes - @book_duet.mixtapes
+      @your_mixtapes = @book_duet.mixtapes.where(user: id)
+    end
   end
 end

@@ -8,7 +8,8 @@ class MixtapesController < ApplicationController
   }
 
   def index
-    @mixtapes = Mixtape.all
+    user_id = session[:user_id]
+    @mixtapes = Mixtape.where(user_id: user_id)
   end
 
   def new
@@ -25,7 +26,7 @@ class MixtapesController < ApplicationController
 
     if @mixtape.save
       flash[:success] = MESSAGES[:create_success]
-      redirect_to profile_path
+      redirect_to your_mixtapes_path
     else
       flash[:errors] = MESSAGES[:create_fail]
       render :new
@@ -37,7 +38,7 @@ class MixtapesController < ApplicationController
     @mixtape.update(mixtape_params)
     if @mixtape.save
       flash[:success] = MESSAGES[:edit_success]
-      redirect_to profile_path
+      redirect_to your_mixtapes_path
     else
       flash[:failure] = MESSAGES[:edit_failure]
       render :edit
@@ -49,7 +50,7 @@ def destroy
   @mixtape = Mixtape.find(params[:id])
   @mixtape.destroy
 
-  redirect_to profile_path
+  redirect_to your_mixtapes_path
 end
   private
 

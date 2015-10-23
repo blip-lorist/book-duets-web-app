@@ -27,8 +27,11 @@ Rails.application.routes.draw do
 
   get '/book_duets/:id' => 'book_duets#show', as: 'book_duet'
 
+  post 'book_duets/:id/add_to_mixtape', to: 'book_duets#add_to_mixtape', as: 'add_to_mixtape'
+
+
   # ____ Users ____
-  get '/profile' => 'users#show', as: 'profile'
+  get '/your_duets' => 'users#show', as: 'your_duets'
 
   # ____ Mixtapes ____
   resources :mixtapes

@@ -1,0 +1,8 @@
+<div class="panel panel-default">
+  <div class="panel-heading">Your Mixtapes</div>
+  <ul class="list-group">
+    <% @mixtapes.each do |mixtape| %>
+      <li class="list-group-item"><%= link_to mixtape.title, mixtape_path(mixtape) %></li>
+    <% end %>
+  </ul>
+</div>
