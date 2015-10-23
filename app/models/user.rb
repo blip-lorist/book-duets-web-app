@@ -9,6 +9,12 @@ class User < ActiveRecord::Base
   # ____ Validations ____
   validates :uid, :provider, :username, presence: true
 
+  def authenticated?(attribute, token)
+  digest = send("#{attribute}_digest")
+  return false if digest.nil?
+  BCrypt::Password.new(digest).is_password?(token)
+  end
+  
   private
 
   def self.find_or_create_from_auth_hash(auth_hash)
@@ -20,6 +26,11 @@ class User < ActiveRecord::Base
       email = auth_hash["info"]["email"].downcase
       user.update(email: email)
     end
+
+    if user.save
+      UserMailer.account_activation(user).deliver_now
+    end
+
     return user.save ? user : nil
   end
 
@@ -43,4 +54,6 @@ class User < ActiveRecord::Base
     self.remember_token = User.new_token
     update_attribute(:remember_digest, User.digest(remember_token))
   end
+
+
 end
