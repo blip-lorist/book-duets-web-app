@@ -1,0 +1,15 @@
+<div class="jumbotron text-center">
+    <h2>Try a <%= link_to "Suggested Pairing", suggested_pairing_path, class: "btn btn-primary" %> to explore</h2>
+    <h2>connections between authors and musicians.</h2>
+    <h2>~or~</h2>
+    <h2>Try out a custom BookDuet!</h2>
+    <%= form_tag custom_duet_redirect_path, class: "form-inline" do %>
+    <div class="form-group">
+        <%= text_field_tag :musician, nil, class: "form-control", placeholder: "Musician name" %>
+    </div>
+    <div class="form-group">
+        <%= text_field_tag :author, nil, class: "form-control", placeholder: "Author name" %>
+    </div>
+      <%= submit_tag 'SANG IT', :class => "btn btn-primary"%>
+    <% end %>
+</div>

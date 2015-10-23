@@ -3,7 +3,10 @@ Rails.application.routes.draw do
   # See how all your routes lay out with "rake routes".
 
   # You can have the root of your site routed with "root"
-  root 'book_duets#index'
+  root 'welcome#index'
+
+  get '/account', to: 'welcome#account', as: 'account'
+
   # ____ Omniauth and sessions ____
   match '/auth/:provider/callback', to: 'sessions#create', via: [:get, :post]
 
