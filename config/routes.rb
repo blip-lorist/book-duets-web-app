@@ -21,7 +21,11 @@ Rails.application.routes.draw do
 
   get '/custom_duet/:musician/:author' => 'book_duets#custom_duet', as: 'custom_duet'
 
-  post '/book_duet' => 'book_duets#create', as: 'create_book_duet'
+  post '/book_duets' => 'book_duets#create', as: 'create_book_duet'
+
+  get '/book_duets' => 'book_duets#index', as: 'book_duets'
+
+  get '/book_duets/:id' => 'book_duets#show', as: 'book_duet'
 
   # ____ Users ____
   get '/profile' => 'users#show', as: 'profile'

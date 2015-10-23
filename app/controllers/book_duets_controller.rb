@@ -15,7 +15,11 @@ class BookDuetsController < ApplicationController
     BASE_URI = "http://localhost:3333"
   end
 
-  def index; end
+  def index
+    @book_duets = BookDuet.all
+
+    @adj = %w(fiendish clever wicked illuminating snappy thoughtful philosophical tactful wild lively keen perverse)
+  end
 
   def custom_duet_redirect
     if params[:musician].present? && params[:author].present?
@@ -61,5 +65,9 @@ class BookDuetsController < ApplicationController
       flash[:errors] = MESSAGES[:create_fail]
     end
     redirect_to root_path
+  end
+
+  def show
+    @book_duet = BookDuet.find(params[:id])
   end
 end
