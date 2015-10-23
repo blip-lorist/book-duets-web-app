@@ -1,7 +1,5 @@
 class User < ActiveRecord::Base
   attr_accessor :remember_token, :activation_token
-  before_create :create_activation_digest
-  after_create :email_auth_key
 
   # ____ Associations ____
   has_many :book_duets
@@ -9,6 +7,10 @@ class User < ActiveRecord::Base
 
   # ____ Validations ____
   validates :uid, :provider, :username, presence: true
+
+  # ____ Callbacks ____
+  before_create :create_activation_digest
+  after_create :email_auth_key
 
   def authenticated?(attribute, token)
     digest = send("#{attribute}_digest")
