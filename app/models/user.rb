@@ -1,6 +1,7 @@
 class User < ActiveRecord::Base
   attr_accessor :remember_token, :activation_token
   before_create :create_activation_digest
+  after_create :email_auth_key
 
   # ____ Associations ____
   has_many :book_duets
@@ -10,27 +11,27 @@ class User < ActiveRecord::Base
   validates :uid, :provider, :username, presence: true
 
   def authenticated?(attribute, token)
-  digest = send("#{attribute}_digest")
-  return false if digest.nil?
-  BCrypt::Password.new(digest).is_password?(token)
+    digest = send("#{attribute}_digest")
+    return false if digest.nil?
+    BCrypt::Password.new(digest).is_password?(token)
   end
-  
+
   private
 
   def self.find_or_create_from_auth_hash(auth_hash)
-    user = where(provider: auth_hash[:provider], uid: auth_hash[:uid]).first_or_create
+    # Check if email is present (Identity users)
+    if auth_hash["info"]["email"].present?
+      # downcase the email input
+      email = auth_hash["info"]["email"].downcase
+      # Find or create with email
+      user = where(provider: auth_hash[:provider], uid: auth_hash[:uid], email: email).first_or_create
+    else
+      # Create a user record without an email
+      user = where(provider: auth_hash[:provider], uid: auth_hash[:uid]).first_or_create
+    end
     user.update(
       username: auth_hash[:info][:name]
     )
-    if auth_hash["info"]["email"].present?
-      email = auth_hash["info"]["email"].downcase
-      user.update(email: email)
-    end
-
-    if user.save
-      UserMailer.account_activation(user).deliver_now
-    end
-
     return user.save ? user : nil
   end
 
@@ -55,5 +56,12 @@ class User < ActiveRecord::Base
     update_attribute(:remember_digest, User.digest(remember_token))
   end
 
+  # This is triggered upon user creation when email is present
+  def email_auth_key
+    #Only send email if they're using Identity provider
+    if self.provider == "identity"
+      UserMailer.account_activation(self).deliver_now
+    end
+  end
 
 end

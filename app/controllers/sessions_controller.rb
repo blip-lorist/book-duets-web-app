@@ -9,9 +9,15 @@ class SessionsController < ApplicationController
 
   def create
     @user = User.find_or_create_from_auth_hash(auth_hash)
-    session[:user_id] = @user.id
-    flash[:success] = MESSAGES[:auth_success]
-    redirect_to root_path
+
+    if @user.id != nil
+      session[:user_id] = @user.id
+      flash[:success] = MESSAGES[:auth_success]
+      redirect_to root_path
+    else
+      flash[:errors] = MESSAGES[:auth_failure]
+      redirect_to root_path
+    end
   end
 
   def failure
