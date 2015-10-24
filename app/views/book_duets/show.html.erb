@@ -3,8 +3,10 @@
   <p><%= @book_duet.duet_text %></p>
 </blockquote>
 
-<p><%= link_to "See more Book Duets", book_duets_path, class: "btn btn-info"%></p>
-<p><%= link_to "Try a New Duo", root_path, class: "btn btn-info"%></p>
+<div class="btn-group" role="group" aria-label="...">
+  <%= link_to "See more Book Duets", book_duets_path, class: "btn btn-success"%>
+  <%= link_to "Try a New Duo", root_path, class: "btn btn-info"%>
+</div>
 
 <% if current_user %>
         <p>Save to a mixtape:</p>

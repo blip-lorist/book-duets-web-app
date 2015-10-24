@@ -7,7 +7,10 @@
     <p><%= @custom_duet["book_duet"]%></p>
   </blockquote>
 
-  <p><%= link_to "Encore!", custom_duet_path, class: "btn btn-info"%></p>
-  <p><%= link_to "Save to Public Feed", create_book_duet_path(@custom_duet), :method => :post %></p>
+  <div class="btn-group" role="group" aria-label="...">
+    <%= link_to "Encore!", custom_duet_path, class: "btn btn-info" %>
+    <%= link_to "Save to Public Feed", create_book_duet_path(@custom_duet), method: :post, class: "btn btn-success" %>
+    <%= link_to "Try a New Duo", root_path, class: "btn btn-info"%>
+  </div>
+
 <% end %>
-<p><%= link_to "Try a New Duo", root_path, class: "btn btn-info"%></p>

@@ -32,7 +32,6 @@ class BookDuetsController < ApplicationController
       # Make this url friendly
       musician = url_cleaner(params[:musician])
       author = url_cleaner(params[:author])
-      binding.pry
       redirect_to custom_duet_path(musician, author)
     else
       redirect_to root_path
