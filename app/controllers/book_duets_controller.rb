@@ -1,3 +1,6 @@
+require "erb"
+include ERB::Util
+
 class BookDuetsController < ApplicationController
   before_action :setup_book_duet, only: [:show, :add_to_mixtape, :edit]
   before_action :set_book_duet, only: [:show, :setup_book_duet, :add_to_mixtape]
@@ -26,7 +29,11 @@ class BookDuetsController < ApplicationController
 
   def custom_duet_redirect
     if params[:musician].present? && params[:author].present?
-      redirect_to custom_duet_path(params[:musician], params[:author])
+      # Make this url friendly
+      musician = url_cleaner(params[:musician])
+      author = url_cleaner(params[:author])
+      binding.pry
+      redirect_to custom_duet_path(musician, author)
     else
       redirect_to root_path
     end
@@ -39,8 +46,8 @@ class BookDuetsController < ApplicationController
   end
 
   def custom_duet
-    musician = params[:musician]
-    author = params[:author]
+    musician = params["musician"]
+    author = params["author"]
 
     # Call API and return a custom duet
     @custom_duet = HTTParty.get(BASE_URI + "/custom_duet?musician=#{musician}&author=#{author}", :headers => {
@@ -89,6 +96,17 @@ class BookDuetsController < ApplicationController
 
 
   private
+
+  def url_cleaner(name)
+    # Formatting initials for API
+    name = name.gsub(/(?<=[A-Z]\.)(?=[A-Z].)+/, ' ')
+    # Titlecase the name
+    titlecase_name = name.titlecase
+    # Encode for URI
+    name_encoded = url_encode(titlecase_name)
+
+    return name_encoded
+  end
 
   def set_book_duet
     @book_duet = BookDuet.find(params[:id])
