@@ -1,0 +1,7 @@
+<% @mixtape.book_duets.each do |book_duet| %>
+  <h4>Ft. <u><%= book_duet.musician %></u>'s lyrics and <u><%= book_duet.author %></u>'s Wikiquote page</h4>
+
+  <blockquote>
+    <p><%= book_duet.duet_text %></p>
+  </blockquote>
+<% end %>
