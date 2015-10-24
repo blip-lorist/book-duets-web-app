@@ -33,12 +33,16 @@ class MixtapesController < ApplicationController
     end
   end
 
+  def edit
+    @mixtape = Mixtape.find(params[:id])
+  end
+
   def update
     @mixtape = Mixtape.find(params[:id])
     @mixtape.update(mixtape_params)
     if @mixtape.save
       flash[:success] = MESSAGES[:edit_success]
-      redirect_to mixtapes_path
+      redirect_to mixtape_path(@mixtape)
     else
       flash[:failure] = MESSAGES[:edit_failure]
       render :edit
