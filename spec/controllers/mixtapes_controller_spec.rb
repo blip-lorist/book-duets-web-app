@@ -11,6 +11,8 @@ RSpec.describe MixtapesController, type: :controller do
     it "loads all mixtapes into @mixtapes" do
       mixtape1 = create :mixtape
       mixtape2 = create :mixtape
+      session[:user_id] = 1
+
       get :index
       expect(assigns(:mixtapes)).to match_array([mixtape1, mixtape2])
     end

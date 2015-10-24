@@ -26,7 +26,7 @@ class MixtapesController < ApplicationController
 
     if @mixtape.save
       flash[:success] = MESSAGES[:create_success]
-      redirect_to your_mixtapes_path
+      redirect_to mixtapes_path
     else
       flash[:errors] = MESSAGES[:create_fail]
       render :new
@@ -38,7 +38,7 @@ class MixtapesController < ApplicationController
     @mixtape.update(mixtape_params)
     if @mixtape.save
       flash[:success] = MESSAGES[:edit_success]
-      redirect_to your_mixtapes_path
+      redirect_to mixtapes_path
     else
       flash[:failure] = MESSAGES[:edit_failure]
       render :edit
@@ -50,7 +50,7 @@ def destroy
   @mixtape = Mixtape.find(params[:id])
   @mixtape.destroy
 
-  redirect_to your_mixtapes_path
+  redirect_to mixtapes_path
 end
   private
 

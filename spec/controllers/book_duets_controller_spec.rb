@@ -1,4 +1,6 @@
 require 'rails_helper'
+require "erb"
+include ERB::Util
 
 RSpec.describe BookDuetsController, type: :controller do
 
@@ -36,7 +38,10 @@ RSpec.describe BookDuetsController, type: :controller do
 
     it "redirects to custom_duet if both musician and author are provided" do
       get :custom_duet_redirect, :musician => "Weird Al", :author => "William S. Burroughs"
-      expect(response).to redirect_to(custom_duet_path("Weird Al", "William S. Burroughs"))
+      musician = url_encode("Weird Al")
+      author = url_encode("William S. Burroughs")
+
+      expect(response).to redirect_to(custom_duet_path(musician, author))
     end
   end
 
