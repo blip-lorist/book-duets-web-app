@@ -1,7 +1,29 @@
-<% @mixtape.book_duets.each do |book_duet| %>
-  <h4>Ft. <u><%= book_duet.musician %></u>'s lyrics and <u><%= book_duet.author %></u>'s Wikiquote page</h4>
+<div class="row">
+  <div class="col-sm-offset-2 col-sm-8">
+    <div class="panel panel-success">
+      <div class="panel-heading">
+        <h3><%= @mixtape.title %>
+          <%= link_to edit_mixtape_path do %>
+            <i class="fa fa-pencil-square"></i>
+          <% end %>
+          <%= link_to mixtape_path(@mixtape), method: :delete do %>
+            <i class="fa fa-trash-o"></i>
+          <% end %>
+        </h3>
+      </div>
+      <div class="panel-body">
+        <% if @mixtape.book_duets.count == 0 %>
+          <h4>Why don't you add some Book Duets?</h4>
+        <% else %>
+          <% @mixtape.book_duets.each do |book_duet| %>
+            <h4>Ft. <u><%= book_duet.musician %></u>'s lyrics and <u><%= book_duet.author %></u>'s Wikiquote page</h4>
 
-  <blockquote>
-    <p><%= book_duet.duet_text %></p>
-  </blockquote>
-<% end %>
+            <blockquote>
+              <p><%= book_duet.duet_text %></p>
+            </blockquote>
+          <% end %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>

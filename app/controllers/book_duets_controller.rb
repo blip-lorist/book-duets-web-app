@@ -86,7 +86,7 @@ class BookDuetsController < ApplicationController
 
     if @book_duet.mixtapes.exists?(id: mixtape_id)
       flash[:success] = "You successfully saved this Book Duet to your mixtape."
-      redirect_to root_path
+      redirect_to mixtape_path(mixtape_id)
     else
       flash[:failure] = "Sorry, that Book Duet couldn't be saved to your mixtape."
       render :show
