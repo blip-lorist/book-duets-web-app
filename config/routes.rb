@@ -27,13 +27,13 @@ Rails.application.routes.draw do
 
   get '/book_duets/:id' => 'book_duets#show', as: 'book_duet'
 
-  post 'book_duets/:id/add_to_mixtape', to: 'book_duets#add_to_mixtape', as: 'add_to_mixtape'
-
+  post '/book_duets/:id/add_to_mixtape', to: 'book_duets#add_to_mixtape', as: 'add_to_mixtape'
 
   # ____ Users ____
   get '/your_duets' => 'users#show', as: 'your_duets'
 
   # ____ Mixtapes ____
+  delete '/mixtapes/:mixtape_id/book_duet/:id', to: 'mixtapes#remove_book_duet', as: 'remove_book_duet'
   resources :mixtapes
 
   resources :account_activations, only: [:edit]

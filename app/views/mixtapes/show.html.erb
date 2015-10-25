@@ -10,14 +10,19 @@
             <i class="fa fa-trash-o"></i>
           <% end %>
         </h3>
+        <h4>Description: <%= @mixtape.description %></h4>
       </div>
       <div class="panel-body">
         <% if @mixtape.book_duets.count == 0 %>
           <h4>Why don't you add some Book Duets?</h4>
         <% else %>
           <% @mixtape.book_duets.each do |book_duet| %>
-            <h4>Ft. <u><%= book_duet.musician %></u>'s lyrics and <u><%= book_duet.author %></u>'s Wikiquote page</h4>
-
+            <h4>Ft. <u><%= book_duet.musician %></u>'s lyrics and
+              <u><%= book_duet.author %></u>'s Wikiquote page
+              <%= link_to remove_book_duet_path(@mixtape, book_duet), method: :delete do %>
+                <i class="fa fa-times-circle"></i>
+              <% end %>
+            </h4>
             <blockquote>
               <p><%= book_duet.duet_text %></p>
             </blockquote>

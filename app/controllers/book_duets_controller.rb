@@ -79,6 +79,8 @@ class BookDuetsController < ApplicationController
   def show
   end
 
+  # Mahalo to @arhx - this part is heavily influenced by her
+  # cookbooks code in our AdaCooks project!
   def add_to_mixtape
     mixtape_id = params[:mixtape][:mixtape_id]
     mixtape = Mixtape.find(mixtape_id)
@@ -92,7 +94,6 @@ class BookDuetsController < ApplicationController
       render :show
     end
   end
-
 
   private
 

@@ -4,7 +4,8 @@ class MixtapesController < ApplicationController
     create_success: "You've successfully created a mixtape.",
     create_fail: "Sorry, this mixtape couldn't be saved. Please try again.",
     edit_success: "You've successfully edited your mixtape!",
-    edit_failure: "Sorry, this mixtape couldn't be edited. Please try again."
+    edit_failure: "Sorry, this mixtape couldn't be edited. Please try again.",
+    remove_duet: "You've successfully removed a Book Duet from this mixtape."
   }
 
   def index
@@ -50,12 +51,23 @@ class MixtapesController < ApplicationController
 
   end
 
-def destroy
-  @mixtape = Mixtape.find(params[:id])
-  @mixtape.destroy
+  def destroy
+    @mixtape = Mixtape.find(params[:id])
+    @mixtape.destroy
 
-  redirect_to mixtapes_path
-end
+    redirect_to mixtapes_path
+  end
+
+  def remove_book_duet
+    mixtape = Mixtape.find(params[:mixtape_id])
+    book_duet = BookDuet.find(params[:id])
+    collection = mixtape.book_duets
+    collection.delete(book_duet)
+
+    flash[:success] = MESSAGES[:remove_duet]
+    redirect_to mixtape_path(mixtape)
+  end
+
   private
 
   def mixtape_params
