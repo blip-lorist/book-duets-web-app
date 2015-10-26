@@ -78,8 +78,11 @@ test:
 #   production:
 #     url: <%= ENV['DATABASE_URL'] %>
 #
-production:
-  <<: *default
-  database: book-duets-web-app_production
-  username: book-duets-web-app
-  password: <%= ENV['BOOK-DUETS-API_DATABASE_PASSWORD'] %>
+  production:
+    adapter: postgresql
+    encoding: unicode
+    database: <%= ENV['RDS_DB_NAME'] %>
+    username: <%= ENV['RDS_USERNAME'] %>
+    password: <%= ENV['RDS_PASSWORD'] %>
+    host: <%= ENV['RDS_HOSTNAME'] %>
+    port: <%= ENV['RDS_PORT'] %>
