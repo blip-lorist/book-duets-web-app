@@ -1,6 +1,6 @@
 require "erb"
 include ERB::Util
-require "HTTParty"
+require "httparty"
 
 class BookDuetsController < ApplicationController
   before_action :setup_book_duet, only: [:show, :add_to_mixtape, :edit]
