@@ -32,7 +32,9 @@ class BookDuetsController < ApplicationController
       # Make this url friendly
       musician = url_cleaner(params[:musician])
       author = url_cleaner(params[:author])
-      redirect_to custom_duet_path(musician, author)
+      level =  session[:level] || "safe"
+
+      redirect_to custom_duet_path(musician, author, level)
     else
       redirect_to root_path
     end
@@ -47,12 +49,13 @@ class BookDuetsController < ApplicationController
   def custom_duet
     musician = params["musician"]
     author = params["author"]
+    filter = params["level"]
 
-    if session[:level] == nil || session[:level] == "SAFE"
+    if filter == "safe"
       level = "hi"
-    elsif session[:level] == "EDGY"
+    elsif filter == "edgy"
       level = "med"
-    elsif session[:level] == "FILTHY"
+    elsif filter == "filthy"
       level = "none"
     end
 
