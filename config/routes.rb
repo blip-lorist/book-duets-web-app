@@ -14,6 +14,9 @@ Rails.application.routes.draw do
 
   match '/logout', to: 'sessions#destroy', via: [:get, :post], as: "logout"
 
+  put '/filter/:level', to: 'sessions#language_filter', as: "filter"
+
+
   # ____ BookDuets ____
   get '/suggested_pairing' => 'book_duets#suggested_pairing', as: 'suggested_pairing'
 
