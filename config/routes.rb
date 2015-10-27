@@ -18,7 +18,7 @@ Rails.application.routes.draw do
 
 
   # ____ BookDuets ____
-  get '/suggested_pairing' => 'book_duets#suggested_pairing', as: 'suggested_pairing'
+  get '/suggested_pairing/:level' => 'book_duets#suggested_pairing', as: 'suggested_pairing'
 
   post '/custom_duet_redirect' => 'book_duets#custom_duet_redirect', as: 'custom_duet_redirect'
 

@@ -2,7 +2,8 @@
   <div class="col-md-6 text-center">
     <div class="panel panel-success">
       <div class="panel-body">
-        <h2>Explore connections between authors and musicians with a <%= link_to "suggested pairing", suggested_pairing_path %></h2>
+        <% level =  session[:level] || "safe" %>
+        <h2>Explore connections between authors and musicians with a <%= link_to "suggested pairing", suggested_pairing_path(level) %></h2>
       </div>
     </div>
   </div>

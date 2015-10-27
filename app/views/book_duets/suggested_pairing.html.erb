@@ -6,7 +6,7 @@
 <blockquote>
   <p><%= @suggested_pairing["book_duet"] %></p>
 </blockquote>
-
+<% level =  session[:level] || "safe" %>
 <%= link_to "Another one!", suggested_pairing_path, class: "btn btn-info" %>
 <%= link_to "Try a New Duo", root_path, class: "btn btn-success"%>
 <% if current_user %>

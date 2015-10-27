@@ -41,22 +41,17 @@ class BookDuetsController < ApplicationController
 
   def suggested_pairing
     # Call API and return a suggested pairing
-    @suggested_pairing = HTTParty.get(BASE_URI + "/suggested_pairing", :headers => {
+    level = set_level
+
+    @suggested_pairing = HTTParty.get(BASE_URI + "/suggested_pairing?filter_level=#{level}", :headers => {
       "Book-Duets-Key" => ENV['BOOK_DUETS_API_KEY'] })
   end
 
   def custom_duet
     musician = params["musician"]
     author = params["author"]
-    filter = params["level"]
 
-    if filter == "safe"
-      level = "hi"
-    elsif filter == "edgy"
-      level = "med"
-    elsif filter == "filthy"
-      level = "none"
-    end
+    level = set_level
 
     # Call API and return a custom duet
     @custom_duet = HTTParty.get(BASE_URI + "/custom_duet?musician=#{musician}&author=#{author}&filter_level=#{level}", :headers => {
@@ -131,4 +126,16 @@ class BookDuetsController < ApplicationController
       @your_mixtapes = @book_duet.mixtapes.where(user: id)
     end
   end
+
+  def set_level
+    filter = params["level"]
+    if filter == "safe"
+      level = "hi"
+    elsif filter == "edgy"
+      level = "med"
+    elsif filter == "filthy"
+      level = "none"
+    end
+  end
+
 end
