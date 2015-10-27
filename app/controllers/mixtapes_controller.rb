@@ -1,4 +1,5 @@
 class MixtapesController < ApplicationController
+  before_action :require_user
 
   MESSAGES = {
     create_success: "You've successfully created a mixtape.",

@@ -4,7 +4,7 @@ include ERB::Util
 class BookDuetsController < ApplicationController
   before_action :setup_book_duet, only: [:show, :add_to_mixtape, :edit]
   before_action :set_book_duet, only: [:show, :setup_book_duet, :add_to_mixtape]
-
+  before_action :require_user, only: [:create, :add_to_mixtape]
 
   MESSAGES = {
     create_success: "You've successfully saved a BookDuet.",
