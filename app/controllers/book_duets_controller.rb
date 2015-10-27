@@ -15,7 +15,7 @@ class BookDuetsController < ApplicationController
   }
 
   if Rails.env.production?
-    BASE_URI = "blah.blah"
+    BASE_URI = "http://api.bookduets.com"
   else
     BASE_URI = "http://localhost:3333"
   end
