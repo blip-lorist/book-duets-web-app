@@ -12,13 +12,13 @@ class SessionsController < ApplicationController
 
   def language_filter
     if params[:level] == "filthy"
-      session[:level] = "FILTHY"
+      session[:level] = "filthy"
       flash[:danger] = MESSAGES[:filthy]
     elsif params[:level] == "edgy"
-      session[:level] = "EDGY"
+      session[:level] = "edgy"
       flash[:warning] = MESSAGES[:edgy]
     elsif params[:level] == "safe"
-      session[:level] = "SAFE"
+      session[:level] = "safe"
       flash[:success] = MESSAGES[:safe]
     end
 

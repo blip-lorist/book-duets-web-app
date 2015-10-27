@@ -6,20 +6,19 @@
 
 
       <li class="dropdown">
-          <% if session[:level] == nil || session[:level] == "SAFE"%>
+          <% if session[:level] == nil || session[:level] == "safe"%>
             <a href="#" class="dropdown-toggle btn-success" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Naugtiness: SAFE<span class="caret"></span></a>
-          <% elsif session[:level] == "EDGY" %>
-            <a href="#" class="dropdown-toggle btn-warning" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Naugtiness: <%= session[:level] %><span class="caret"></span></a>
-          <% elsif session[:level] == "FILTHY" %>
-            <a href="#" class="dropdown-toggle btn-danger" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Naugtiness: <%= session[:level] %><span class="caret"></span></a>
+          <% elsif session[:level] == "edgy" %>
+            <a href="#" class="dropdown-toggle btn-warning" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Naugtiness: <%= session[:level].upcase %><span class="caret"></span></a>
+          <% elsif session[:level] == "filthy" %>
+            <a href="#" class="dropdown-toggle btn-danger" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Naugtiness: <%= session[:level].upcase %><span class="caret"></span></a>
           <% end %>
 
           <ul class="dropdown-menu">
-            <li><%= link_to "SAFE", filter_path("safe"), method: :put %></li>
-            <li><%= link_to "EDGY", filter_path("edgy"), method: :put %></li>
-            <li><%= link_to "FILTHY", filter_path("filthy"), method: :put %></li>
+            <li><%= link_to "Safe", filter_path("safe"), method: :put %></li>
+            <li><%= link_to "Edgy", filter_path("edgy"), method: :put %></li>
+            <li><%= link_to "Filthy", filter_path("filthy"), method: :put %></li>
             <li role="separator" class="divider"></li>
-            <li><%= link_to "More about filters", "" %></li>
           </ul>
       </li>
       <li><%= link_to "Newest Book Duets", book_duets_path %></li>
