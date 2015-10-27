@@ -2,6 +2,11 @@ require 'rails_helper'
 
 RSpec.describe MixtapesController, type: :controller do
 
+  # Skip the authentication for testing porpoises
+  before(:each) do
+    MixtapesController.skip_before_filter :require_user
+  end
+
   describe "GET #index" do
     it "renders the index template" do
       get :index
