@@ -77,7 +77,7 @@ class BookDuetsController < ApplicationController
     duet_text: params[:book_duet],
     user_id: session[:user_id],
     filter_level: params[:filter_level])
-    
+
     if @book_duet.save
       flash[:success] = MESSAGES[:create_success]
     else
