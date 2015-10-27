@@ -7,11 +7,11 @@
 
       <li class="dropdown">
           <% if session[:level] == nil || session[:level] == "safe"%>
-            <a href="#" class="dropdown-toggle btn-success" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Naugtiness: SAFE<span class="caret"></span></a>
+            <a href="#" class="dropdown-toggle btn-success" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Naughtiness: SAFE<span class="caret"></span></a>
           <% elsif session[:level] == "edgy" %>
-            <a href="#" class="dropdown-toggle btn-warning" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Naugtiness: <%= session[:level].upcase %><span class="caret"></span></a>
+            <a href="#" class="dropdown-toggle btn-warning" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Naughtiness: <%= session[:level].upcase %><span class="caret"></span></a>
           <% elsif session[:level] == "filthy" %>
-            <a href="#" class="dropdown-toggle btn-danger" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Naugtiness: <%= session[:level].upcase %><span class="caret"></span></a>
+            <a href="#" class="dropdown-toggle btn-danger" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Naughtiness: <%= session[:level].upcase %><span class="caret"></span></a>
           <% end %>
 
           <ul class="dropdown-menu">
