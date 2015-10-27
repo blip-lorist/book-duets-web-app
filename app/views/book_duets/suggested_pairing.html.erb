@@ -1,11 +1,14 @@
 <h3>A Suggested Pairing</h3>
 
 <h4>Ft. <u><%= @suggested_pairing["musician"] %></u>'s lyrics and <u><%= @suggested_pairing["author"] %></u>'s Wikiquote page</h4>
+<h4>Read more about the <%= link_to "connection", @suggested_pairing["news_source"] %> between this musician and author.</h4>
 
 <blockquote>
   <p><%= @suggested_pairing["book_duet"] %></p>
 </blockquote>
-
-<p>Read more about the <%= link_to "connection", @suggested_pairing["news_source"] %> between this musician and author.</p>
-
-<%= link_to "Gimme another one!", suggested_pairing_path, class: "btn btn-info" %>
+<% level =  session[:level] || "safe" %>
+<%= link_to "Another one!", suggested_pairing_path, class: "btn btn-info" %>
+<%= link_to "Try a New Duo", root_path, class: "btn btn-success"%>
+<% if current_user %>
+  <%= link_to "Save to Public Feed", create_book_duet_path(@suggested_pairing), method: :post, class: "btn btn-info" %>
+<% end %>

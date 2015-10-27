@@ -14,8 +14,12 @@ gem 'uglifier', '>= 1.3.0'
 gem 'coffee-rails', '~> 4.1.0'
 # See https://github.com/rails/execjs#readme for more supported runtimes
 # gem 'therubyracer', platforms: :ruby
+gem 'font-awesome-sass'
+
 gem 'omniauth'
+
 gem 'omniauth-twitter'
+
 gem 'omniauth-identity'
 # Use jquery as the JavaScript library
 gem 'jquery-rails'

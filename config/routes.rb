@@ -3,18 +3,38 @@ Rails.application.routes.draw do
   # See how all your routes lay out with "rake routes".
 
   # You can have the root of your site routed with "root"
-  root 'book_duets#index'
+  root 'welcome#index'
 
+  get '/account', to: 'welcome#account', as: 'account'
+
+  # ____ Omniauth and sessions ____
   match '/auth/:provider/callback', to: 'sessions#create', via: [:get, :post]
 
-  match '/logout', to: 'sessions#destroy', via: [:get, :post], as: "logout"
-  # get '/auth/:provider/callback', to: 'sessions#create'
+  match '/auth/failure', :to => 'sessions#failure', :via => [:get, :post]
 
-  get '/suggested_pairing' => 'book_duets#suggested_pairing', as: 'suggested_pairing'
+  match '/logout', to: 'sessions#destroy', via: [:get, :post], as: "logout"
+
+  put '/filter/:level', to: 'sessions#language_filter', as: "filter"
+
+
+  # ____ BookDuets ____
+  get '/suggested_pairing/:level' => 'book_duets#suggested_pairing', as: 'suggested_pairing'
 
   post '/custom_duet_redirect' => 'book_duets#custom_duet_redirect', as: 'custom_duet_redirect'
 
-  get '/custom_duet/:musician/:author' => 'book_duets#custom_duet', as: 'custom_duet'
+  get '/custom_duet/:musician/:author/:level' => 'book_duets#custom_duet', as: 'custom_duet', :constraints => { :musician => /[^\/]+/, :author => /[^\/]+/, }
+
+  post '/book_duets' => 'book_duets#create', as: 'create_book_duet'
+
+  get '/book_duets' => 'book_duets#index', as: 'book_duets'
+
+  get '/book_duets/:id' => 'book_duets#show', as: 'book_duet'
+
+  post '/book_duets/:id/add_to_mixtape', to: 'book_duets#add_to_mixtape', as: 'add_to_mixtape'
+
+  # ____ Mixtapes ____
+  delete '/mixtapes/:mixtape_id/book_duet/:id', to: 'mixtapes#remove_book_duet', as: 'remove_book_duet'
+  resources :mixtapes
 
   resources :account_activations, only: [:edit]
   # Example of regular route:

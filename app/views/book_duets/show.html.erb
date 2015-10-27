@@ -1,0 +1,23 @@
+<h4>Ft. <u><%= @book_duet.musician %></u>'s lyrics and <u><%= @book_duet.author %></u>'s Wikiquote page</h4>
+<blockquote>
+  <p><%= @book_duet.duet_text %></p>
+</blockquote>
+
+<div class="btn-group" role="group" aria-label="...">
+  <%= link_to "See more Book Duets", book_duets_path, class: "btn btn-success"%>
+  <%= link_to "Try a New Duo", root_path, class: "btn btn-info"%>
+</div>
+
+<% if current_user %>
+        <p>Save to a mixtape:</p>
+        <% if current_user.mixtapes.empty? %>
+          <em>You have no mixtapes to add this Book Duet to.</em>
+        <% elsif @unused_mixtapes.count > 0 %>
+          <%= form_tag(controller: "book_duets", action: "add_to_mixtape", method: "post", class: "form") do %>
+            <%= collection_select(:mixtape, :mixtape_id, @unused_mixtapes, :id, :title, include_blank: true, class: "form-control") %>
+            <%= submit_tag "Save", role: "button", class: "btn btn-default" %>
+          <% end %>
+        <% else %>
+          <em>This Book Duet is already part of all your mixtapes.</em>
+        <% end %>
+      <% end %>
