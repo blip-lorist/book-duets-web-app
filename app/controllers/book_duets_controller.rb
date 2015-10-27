@@ -42,7 +42,6 @@ class BookDuetsController < ApplicationController
   def suggested_pairing
     # Call API and return a suggested pairing
     level = set_level
-
     @suggested_pairing = HTTParty.get(BASE_URI + "/suggested_pairing?filter_level=#{level}", :headers => {
       "Book-Duets-Key" => ENV['BOOK_DUETS_API_KEY'] })
   end
@@ -136,6 +135,8 @@ class BookDuetsController < ApplicationController
     elsif filter == "filthy"
       level = "none"
     end
+
+    return level
   end
 
 end
