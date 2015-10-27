@@ -1,5 +1,6 @@
 require "erb"
 include ERB::Util
+require "HTTParty"
 
 class BookDuetsController < ApplicationController
   before_action :setup_book_duet, only: [:show, :add_to_mixtape, :edit]
@@ -12,8 +13,6 @@ class BookDuetsController < ApplicationController
     cant_find_author: "This author couldn't be found. Please check the spelling and try again.",
     cant_find_musician: "This musician couldn't be found. Please check the spelling and try again."
   }
-
-  require "HTTParty"
 
   if Rails.env.production?
     BASE_URI = "blah.blah"
@@ -62,7 +61,6 @@ class BookDuetsController < ApplicationController
     # Call API and return a custom duet
     @custom_duet = HTTParty.get(BASE_URI + "/custom_duet?musician=#{musician}&author=#{author}&filter_level=#{level}", :headers => {
       "Book-Duets-Key" => ENV['BOOK_DUETS_API_KEY'] })
-
     if @custom_duet["error"]
       if @custom_duet["error"] == "AuthorNotFound"
         flash[:errors] = MESSAGES[:cant_find_author]
@@ -77,8 +75,9 @@ class BookDuetsController < ApplicationController
     musician: params[:musician],
     author: params[:author],
     duet_text: params[:book_duet],
-    user_id: session[:user_id])
-
+    user_id: session[:user_id],
+    filter_level: params[:filter_level])
+    
     if @book_duet.save
       flash[:success] = MESSAGES[:create_success]
     else
