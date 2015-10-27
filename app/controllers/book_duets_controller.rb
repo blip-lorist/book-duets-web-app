@@ -1,6 +1,6 @@
 class BookDuetsController < ApplicationController
 
-  require "HTTParty"
+  require "httparty"
 
   if Rails.env.production?
     BASE_URI = "blah.blah"
