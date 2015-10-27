@@ -48,8 +48,16 @@ class BookDuetsController < ApplicationController
     musician = params["musician"]
     author = params["author"]
 
+    if session[:level] == nil || session[:level] == "SAFE"
+      level = "hi"
+    elsif session[:level] == "EDGY"
+      level = "med"
+    elsif session[:level] == "FILTHY"
+      level = "none"
+    end
+
     # Call API and return a custom duet
-    @custom_duet = HTTParty.get(BASE_URI + "/custom_duet?musician=#{musician}&author=#{author}&filter_level=none", :headers => {
+    @custom_duet = HTTParty.get(BASE_URI + "/custom_duet?musician=#{musician}&author=#{author}&filter_level=#{level}", :headers => {
       "Book-Duets-Key" => ENV['BOOK_DUETS_API_KEY'] })
 
     if @custom_duet["error"]
@@ -73,7 +81,8 @@ class BookDuetsController < ApplicationController
     else
       flash[:errors] = MESSAGES[:create_fail]
     end
-    redirect_to root_path
+
+    redirect_to book_duets_path
   end
 
   def show

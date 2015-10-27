@@ -7,9 +7,8 @@
   <p><%= @suggested_pairing["book_duet"] %></p>
 </blockquote>
 
-
-<div class="btn-group" role="group" aria-label="...">
-  <%= link_to "Another one!", suggested_pairing_path, class: "btn btn-info" %>
-  <%= link_to "Save to Public Feed", create_book_duet_path(@suggested_pairing), method: :post, class: "btn btn-success" %>
-  <%= link_to "Try a New Duo", root_path, class: "btn btn-info"%>
-</div>
+<%= link_to "Another one!", suggested_pairing_path, class: "btn btn-info" %>
+<%= link_to "Try a New Duo", root_path, class: "btn btn-success"%>
+<% if current_user %>
+  <%= link_to "Save to Public Feed", create_book_duet_path(@suggested_pairing), method: :post, class: "btn btn-info" %>
+<% end %>

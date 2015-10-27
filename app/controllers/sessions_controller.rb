@@ -4,8 +4,26 @@ class SessionsController < ApplicationController
   MESSAGES = {
     auth_failure: "Sorry, your sign-in credentials are invalid!",
     auth_success: "Sign in successful!",
+    filthy: "Pretty much Voldemort. May contain problematic language, sexual content, and curse words.",
+    edgy: "All swearing allowed, you rebel.",
+    safe: "Three cheers for censors! @#$ *!@ !@@#$%!",
     logout_success: "See ya!"
   }
+
+  def language_filter
+    if params[:level] == "filthy"
+      session[:level] = "FILTHY"
+      flash[:danger] = MESSAGES[:filthy]
+    elsif params[:level] == "edgy"
+      session[:level] = "EDGY"
+      flash[:warning] = MESSAGES[:edgy]
+    elsif params[:level] == "safe"
+      session[:level] = "SAFE"
+      flash[:success] = MESSAGES[:safe]
+    end
+
+    redirect_to root_path
+  end
 
   def create
     @user = User.find_or_create_from_auth_hash(auth_hash)
