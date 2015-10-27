@@ -2,9 +2,15 @@
   <div>
     <p class="alert alert-success"><%= flash[:success] %></p>
   </div>
-<% end %>
-
-<% if flash[:errors] %>
+<% elsif flash[:warning] %>
+  <div>
+    <p class="alert alert-warning"><%= flash[:warning] %></p>
+  </div>
+<% elsif flash[:danger] %>
+  <div>
+    <p class="alert alert-danger"><%= flash[:danger] %></p>
+  </div>
+<% elsif flash[:errors] %>
   <div>
     <p class="alert alert-danger"><%= flash[:errors] %></p>
   </div>
