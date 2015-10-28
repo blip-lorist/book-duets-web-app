@@ -45,10 +45,11 @@ RSpec.describe MixtapesController, type: :controller do
   describe "POST #create" do
     context "with valid params" do
       let(:valid_params) do
-        {name: "Ironical mashups", description: "Ironful irony."}
+        {title: "Ironical mashups", description: "Ironful irony."}
       end
 
       it "creates a new mixtape" do
+        session[:user_id] = 1
         post :create, mixtape: valid_params
         expect(Mixtape.count).to eq(1)
       end

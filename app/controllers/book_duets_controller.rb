@@ -138,5 +138,4 @@ class BookDuetsController < ApplicationController
 
     return level
   end
-
 end
