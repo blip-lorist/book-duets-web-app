@@ -1,5 +1,8 @@
 <div class="well">
-  <h4>Ft. <u><%= @book_duet.musician %></u>'s lyrics and <u><%= @book_duet.author %></u>'s Wikiquote page</h4>
+  <h4>Ft. <u><%= @book_duet.musician %></u>'s lyrics and <u><%= @book_duet.author %></u>'s Wikiquote page
+    <%= render partial: "explicit_label", locals: {filter_level: @book_duet.filter_level} %>
+  </h4>
+  <h4>Saved by <%= @book_duet.user.username %></h4>
   <blockquote>
     <p><%= @book_duet.duet_text %></p>
   </blockquote>
