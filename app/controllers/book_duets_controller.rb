@@ -55,11 +55,17 @@ class BookDuetsController < ApplicationController
     # Call API and return a custom duet
     @custom_duet = HTTParty.get(BASE_URI + "/custom_duet?musician=#{musician}&author=#{author}&filter_level=#{level}", :headers => {
       "Book-Duets-Key" => ENV['BOOK_DUETS_API_KEY'] })
+
     if @custom_duet["error"]
       if @custom_duet["error"] == "AuthorNotFound"
         flash[:errors] = MESSAGES[:cant_find_author]
+        redirect_to root_path
       elsif @custom_duet["error"] == "LyricsNotFound"
         flash[:errors] = MESSAGES[:cant_find_musician]
+        redirect_to root_path
+      else
+        flash[:errors] = "Sorry, something went wrong. Please try again later!"
+        redirect_to root_path
       end
     end
   end
@@ -138,5 +144,4 @@ class BookDuetsController < ApplicationController
 
     return level
   end
-
 end

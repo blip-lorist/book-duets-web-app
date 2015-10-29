@@ -45,12 +45,33 @@ RSpec.describe MixtapesController, type: :controller do
   describe "POST #create" do
     context "with valid params" do
       let(:valid_params) do
-        {name: "Ironical mashups", description: "Ironful irony."}
+        {title: "Ironical mashups", description: "Ironful irony."}
       end
 
       it "creates a new mixtape" do
+        session[:user_id] = 1
         post :create, mixtape: valid_params
         expect(Mixtape.count).to eq(1)
+      end
+    end
+
+    context "with invalid params" do
+
+      before(:each) do
+        session[:user_id] = 1
+        post :create, mixtape: invalid_params
+      end
+
+      let(:invalid_params) do
+        {title: nil, description: "Ironful irony."}
+      end
+
+      it "doesn't create the mixtape" do
+        expect(Mixtape.count).to eq(0)
+      end
+
+      it "reloads the new template" do
+        expect(response).to render_template("new")
       end
     end
   end
@@ -60,14 +81,29 @@ RSpec.describe MixtapesController, type: :controller do
       @mixtape = create :mixtape
     end
 
-    let(:new_mixtape_deets) do
-      {title: "New title", description: "New desc"}
+    context "with valid params" do
+      let(:new_mixtape_deets) do
+        {title: "New title", description: "New desc"}
+      end
+
+      it "updates the mixtape" do
+        put :update, id: @mixtape, mixtape: new_mixtape_deets
+        @mixtape.reload
+        expect(@mixtape.title).to eq("New title")
+      end
     end
 
-    it "updates the mixtape" do
-      put :update, id: @mixtape, mixtape: new_mixtape_deets
-      @mixtape.reload
-      expect(@mixtape.title).to eq("New title")
+    context "with invalid params" do
+      let(:missing_deets) do
+        {title: nil, description: "New desc"}
+      end
+
+      it "doesn't update the mixtape" do
+        create :mixtape
+        put :update, id: @mixtape, mixtape: missing_deets
+        @mixtape.reload
+        expect(@mixtape.title).to eq("90s Jams")
+      end
     end
   end
 
@@ -80,6 +116,24 @@ RSpec.describe MixtapesController, type: :controller do
       expect(Mixtape.count).to eq(1)
       delete :destroy, id: @mixtape
       expect(Mixtape.count).to eq(0)
+    end
+  end
+
+  describe "DELETE remove_book_duet" do
+
+    let(:remove_mixtape_params) do
+      {mixtape_id: 1, id: 1}
+    end
+
+    it "removes a book_duet from a mixtape" do
+      duet = create :book_duet, id: 1
+      mixtape = create :mixtape, id: 1
+
+      mixtape.book_duets << duet
+      expect(mixtape.book_duets.count).to eq(1)
+
+      delete :remove_book_duet, remove_mixtape_params
+      expect(mixtape.book_duets.count).to eq(0)
     end
   end
 end
