@@ -24,13 +24,11 @@ Rails.application.routes.draw do
 
   get '/custom_duet/:musician/:author/:level' => 'book_duets#custom_duet', as: 'custom_duet', :constraints => { :musician => /[^\/]+/, :author => /[^\/]+/, }
 
+  post '/book_duets/:id/add_to_mixtape', to: 'book_duets#add_to_mixtape', as: 'add_to_mixtape'
+
   post '/book_duets' => 'book_duets#create', as: 'create_book_duet'
 
-  get '/book_duets' => 'book_duets#index', as: 'book_duets'
-
-  get '/book_duets/:id' => 'book_duets#show', as: 'book_duet'
-
-  post '/book_duets/:id/add_to_mixtape', to: 'book_duets#add_to_mixtape', as: 'add_to_mixtape'
+  resources :book_duets, only: [:index, :show]
 
   # ____ Mixtapes ____
   delete '/mixtapes/:mixtape_id/book_duet/:id', to: 'mixtapes#remove_book_duet', as: 'remove_book_duet'
