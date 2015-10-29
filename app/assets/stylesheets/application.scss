@@ -21,6 +21,15 @@
 
 body {
   background-color: rgba(40, 40, 40, 1.0);
+  color: #fff;
+}
+
+a {
+  color: rgb(85, 129, 222);
+}
+
+a:hover {
+  color: rgb(95, 129, 245);
 }
 
 h1 small {
@@ -35,7 +44,9 @@ h1 small {
 .page-header {
   background-image: url(image_path("trebletroublesmall.png"));
   background-repeat: no-repeat;
+  margin-top: 60px;
   height: 110px;
+  border: none;
 }
 
 .page-header h1 {
@@ -50,7 +61,7 @@ h1 small {
   background-color: rgba(40, 40, 40, 0.7);
 }
 
-.jumbotron h1, h2{
+.jumbotron h2{
   color: #fff;
   text-shadow: 2px 2px #000;
 }
@@ -60,4 +71,8 @@ h1 small {
   background-size: 100%;
   background-repeat: no-repeat;
   background-color: rgba(40, 40, 40, 0.7);
+}
+
+.panel-body, .list-group-item {
+  background-color: rgba(40, 40, 40, 1);
 }
