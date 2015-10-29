@@ -1,15 +1,17 @@
-<% unless @custom_duet["error"] %>
-<h3>A Custom Duet</h3>
+<div class="well">
+  <% unless @custom_duet["error"] %>
+  <h3>A Custom Duet</h3>
 
-  <h4>Ft. <u><%= @custom_duet["musician"] %></u>'s lyrics and <u><%= @custom_duet["author"] %></u>'s Wikiquote page</h4>
+    <h4>Ft. <u><%= @custom_duet["musician"] %></u>'s lyrics and <u><%= @custom_duet["author"] %></u>'s Wikiquote page</h4>
 
-  <blockquote>
-    <p><%= @custom_duet["book_duet"]%></p>
-  </blockquote>
+    <blockquote>
+      <p><%= @custom_duet["book_duet"]%></p>
+    </blockquote>
 
-  <%= link_to "Encore!", custom_duet_path, class: "btn btn-info" %>
-  <%= link_to "Try a New Duo", root_path, class: "btn btn-success"%>
-  <% if current_user %>
-    <%= link_to "Save to Public Feed", create_book_duet_path(@custom_duet), method: :post, class: "btn btn-info" %>
+    <%= link_to "Encore!", custom_duet_path, class: "btn btn-info" %>
+    <%= link_to "Try a New Duo", root_path, class: "btn btn-success"%>
+    <% if current_user %>
+      <%= link_to "Save to Public Feed", create_book_duet_path(@custom_duet), method: :post, class: "btn btn-info" %>
+    <% end %>
   <% end %>
-<% end %>
+</div>
