@@ -1,12 +1,15 @@
 class MixtapesController < ApplicationController
   before_action :require_user
+  before_action :require_owner, only: [:show, :edit, :update, :destroy]
 
   MESSAGES = {
     create_success: "You've successfully created a mixtape.",
     create_fail: "Sorry, this mixtape couldn't be saved. Please try again.",
     edit_success: "You've successfully edited your mixtape!",
     edit_failure: "Sorry, this mixtape couldn't be edited. Please try again.",
-    remove_duet: "You've successfully removed a Book Duet from this mixtape."
+    remove_duet: "You've successfully removed a Book Duet from this mixtape.",
+    login: "Please log in to view that page.",
+    go_away: "That's not your mixtape!"
   }
 
   def index
@@ -46,10 +49,9 @@ class MixtapesController < ApplicationController
       flash[:success] = MESSAGES[:edit_success]
       redirect_to mixtape_path(@mixtape)
     else
-      flash[:failure] = MESSAGES[:edit_failure]
+      flash[:errors] = MESSAGES[:edit_failure]
       render :edit
     end
-
   end
 
   def destroy
@@ -75,4 +77,13 @@ class MixtapesController < ApplicationController
     params.require(:mixtape).permit(:title, :description)
   end
 
+  def require_owner
+    if !current_user
+      flash[:errors] = MESSAGES[:login]
+      redirect_to root_path
+    elsif !current_user.mixtapes.exists?(id: params[:id])
+      flash[:errors] = MESSAGES[:go_away]
+      redirect_to mixtapes_path
+    end
+  end
 end
