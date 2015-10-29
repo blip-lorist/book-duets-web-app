@@ -1,27 +1,18 @@
-<div class="row">
-  <div class="jumbotron suggested-connections text-center">
-    <!-- <div class="container"> -->
-        <% level =  session[:level] || "safe" %>
-        <h2>Explore connections between authors and musicians</h2>
-        <h2>Get a <%= link_to "SUGGESTED PAIRING", suggested_pairing_path(level), class: "btn btn-lg btn-primary" %></h2>
-    <!-- </div> -->
-  </div>
+<div class="jumbotron suggested-connections text-center">
+      <% level =  session[:level] || "safe" %>
+      <h2>Explore connections between authors and musicians</h2>
+      <%= link_to "SUGGESTED PAIRING", suggested_pairing_path(level), class: "btn btn-lg btn-primary" %>
 </div>
 
-<div class="row">
-  <div class="jumbotron custom-duet text-center">
-    <!-- <div class="container"> -->
-    <h2>...or try out a custom Book Duet!</h2>
-    <%= form_tag custom_duet_redirect_path, class: "form-inline" do %>
-    <div class="form-group">
-        <%= text_field_tag :musician, nil, class: "form-control", placeholder: "Musician name" %>
-    </div>
-    <div class="form-group">
-        <%= text_field_tag :author, nil, class: "form-control", placeholder: "Author name" %>
-    </div>
-    <p></p>
-      <%= submit_tag 'SANG IT', :class => "btn btn-lg btn-primary"%>
-    <% end %>
-    <!-- </div> -->
+<div class="jumbotron custom-duet text-center">
+  <h2>...or try out a custom Book Duet!</h2>
+  <%= form_tag custom_duet_redirect_path, class: "form-inline" do %>
+  <div class="form-group">
+      <%= text_field_tag :musician, nil, class: "form-control", placeholder: "Musician name" %>
   </div>
+  <div class="form-group">
+      <%= text_field_tag :author, nil, class: "form-control", placeholder: "Author name" %>
+  </div>
+    <%= submit_tag 'SANG IT', :class => "btn btn-lg btn-primary"%>
+  <% end %>
 </div>
