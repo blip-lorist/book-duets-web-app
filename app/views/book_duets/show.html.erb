@@ -7,10 +7,11 @@
     <p><%= @book_duet.duet_text %></p>
   </blockquote>
 
-  <div class="btn-group" role="group" aria-label="...">
     <%= link_to "See more Book Duets", book_duets_path, class: "btn btn-success"%>
     <%= link_to "Try a New Duo", root_path, class: "btn btn-info"%>
-  </div>
+    <% url = tweetify(@book_duet.musician, @book_duet.author) %>
+    <a class="btn btn-primary" href=<%= url %> data-size="large" data-count value="none"><i class="fa fa-twitter"></i> Tweet
+</a>
 
   <% if current_user %>
     <p>Save to a mixtape:</p>
@@ -26,3 +27,22 @@
     <% end %>
   <% end %>
 </div>
+
+
+
+<script>window.twttr = (function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0],
+    t = window.twttr || {};
+  if (d.getElementById(id)) return t;
+  js = d.createElement(s);
+  js.id = id;
+  js.src = "https://platform.twitter.com/widgets.js";
+  fjs.parentNode.insertBefore(js, fjs);
+
+  t._e = [];
+  t.ready = function(f) {
+    t._e.push(f);
+  };
+
+  return t;
+}(document, "script", "twitter-wjs"));</script>
