@@ -219,6 +219,7 @@ GEM
       addressable (>= 2.3.6)
       crack (>= 0.3.2)
       hashdiff
+    will_paginate (3.0.7)
 
 PLATFORMS
   ruby
@@ -252,6 +253,7 @@ DEPENDENCIES
   vcr
   web-console (~> 2.0)
   webmock
+  will_paginate (~> 3.0.6)
 
 BUNDLED WITH
    1.10.6

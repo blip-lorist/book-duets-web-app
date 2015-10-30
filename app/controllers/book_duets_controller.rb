@@ -21,7 +21,8 @@ class BookDuetsController < ApplicationController
   end
 
   def index
-    @book_duets = BookDuet.newest
+
+    @book_duets = BookDuet.newest.paginate(:page => params[:page], :per_page => 10)
 
     @adj = %w(fiendish clever wicked illuminating snappy thoughtful philosophical tactful wild lively keen perverse)
   end

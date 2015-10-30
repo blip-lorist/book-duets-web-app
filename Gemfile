@@ -36,6 +36,8 @@ gem 'bootstrap-sass'
 gem 'bcrypt', '~> 3.1.7'
 
 gem 'httparty'
+
+gem 'will_paginate', '~> 3.0.6'
 # Use Unicorn as the app server
 # gem 'unicorn'
 
