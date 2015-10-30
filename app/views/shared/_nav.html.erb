@@ -28,7 +28,7 @@
           </li>
         <% end %>
 
-        <li><%= link_to "Suggested Reading", book_duets_path %></li>
+        <li><%= link_to "Public Collection", book_duets_path %></li>
         <li class="dropdown">
           <% if session[:level] == nil || session[:level] == "safe"%>
             <button type="button" class="btn btn-success dropdown-toggle navbar-btn" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Filter: SAFE <span class="caret"></span></button>

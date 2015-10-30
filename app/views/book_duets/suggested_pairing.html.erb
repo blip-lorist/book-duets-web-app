@@ -11,6 +11,6 @@
   <%= link_to "Another one!", suggested_pairing_path, class: "btn btn-info" %>
   <%= link_to "Try a New Duo", root_path, class: "btn btn-success"%>
   <% if current_user %>
-    <%= link_to "Save to Public Feed", create_book_duet_path(@suggested_pairing), method: :post, class: "btn btn-info" %>
+    <%= link_to "Save to Public Collection", create_book_duet_path(@suggested_pairing), method: :post, class: "btn btn-info" %>
   <% end %>
 </div>
