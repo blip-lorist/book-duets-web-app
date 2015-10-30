@@ -21,7 +21,7 @@ class BookDuetsController < ApplicationController
   end
 
   def index
-    @book_duets = BookDuet.all
+    @book_duets = BookDuet.newest
 
     @adj = %w(fiendish clever wicked illuminating snappy thoughtful philosophical tactful wild lively keen perverse)
   end

@@ -5,5 +5,9 @@ class BookDuet < ActiveRecord::Base
 
   # ____ Validations ____
   validates :musician, :author, :duet_text, :user_id, presence: true
-  
+
+  # ____ Scopes ____
+  scope :newest, -> { order("created_at DESC") }
+
+
 end
