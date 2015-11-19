@@ -7,6 +7,8 @@ Rails.application.routes.draw do
 
   get '/account', to: 'welcome#account', as: 'account'
 
+  get '/about', to: 'welcome#about', as: 'about'
+
   # ____ Omniauth and sessions ____
   match '/auth/:provider/callback', to: 'sessions#create', via: [:get, :post]
 
