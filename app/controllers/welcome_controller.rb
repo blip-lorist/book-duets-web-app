@@ -4,5 +4,6 @@ class WelcomeController < ApplicationController
 
   def account;end
 
+  def about;end
 
 end
