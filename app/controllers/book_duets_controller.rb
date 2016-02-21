@@ -60,13 +60,13 @@ class BookDuetsController < ApplicationController
     if @custom_duet["error"]
       if @custom_duet["error"] == "AuthorNotFound"
         flash[:errors] = MESSAGES[:cant_find_author]
-        redirect_to root_path
+        render "welcome/index" 
       elsif @custom_duet["error"] == "LyricsNotFound"
         flash[:errors] = MESSAGES[:cant_find_musician]
-        redirect_to root_path
+        render "welcome/index" 
       else
         flash[:errors] = "Sorry, something went wrong. Please try again later!"
-        redirect_to root_path
+        render "welcome/index" 
       end
     end
   end
